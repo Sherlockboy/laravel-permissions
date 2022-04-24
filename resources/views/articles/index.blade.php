@@ -22,6 +22,9 @@
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Date</div>
                                 </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Published at</div>
+                                </th>
                                 @if(auth()->user()->IsAdmin())
                                     <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-left">User</div>
@@ -40,6 +43,9 @@
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $article->created_at }}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{ $article->published_at }}</div>
                                     </td>
                                     @if(auth()->user()->IsAdmin())
                                         <td class="p-2 whitespace-nowrap">

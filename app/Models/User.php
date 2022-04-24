@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'role_id',
     ];
 
     /**
@@ -44,9 +45,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function IsAdmin()
+    public function IsUser(): bool
     {
-        return $this->attributes['is_admin'];
+        return $this->attributes['role_id'] == 1;
+    }
+
+    public function IsAdmin(): bool
+    {
+        return $this->attributes['role_id'] == 2;
+    }
+
+    public function IsPublisher(): bool
+    {
+        return $this->attributes['role_id'] == 3;
+    }
+
+    public function canPublish(): bool
+    {
+        return $this->IsAdmin() || $this->IsPublisher();
     }
 
     public function articles(): HasMany

@@ -35,6 +35,15 @@
                             </select>
                         </div>
 
+                        @if(auth()->user()->canPublish())
+                        <!-- Published at -->
+                            <div class="mt-4">
+                                <x-checkbox name="published_at" value="1"/>
+
+                                <x-label for="published_at" :value="__('Published')"/>
+                            </div>
+                        @endif
+
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ml-4">
                                 {{ __('Add') }}

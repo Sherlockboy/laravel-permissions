@@ -16,6 +16,7 @@ class Article extends Model
         'full_text',
         'category_id',
         'user_id',
+        'published_at',
     ];
 
     protected static function booted()

@@ -24,12 +24,15 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        Article::create([
+        $data = [
             'title' => $request->input('title'),
             'full_text' => $request->input('full_text'),
             'category_id' => $request->input('category_id'),
             'user_id' => auth()->id(),
-        ]);
+            'published_at' => auth()->user()->canPublish() && $request->input('published_at') ? now() : null,
+        ];
+
+        Article::create($data);
 
         return redirect()->route('articles.index');
     }
@@ -43,12 +46,17 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article)
     {
-        $article->update([
+        $data = [
             'title' => $request->input('title'),
             'full_text' => $request->input('full_text'),
             'category_id' => $request->input('category_id'),
-            'user_id' => auth()->id(),
-        ]);
+        ];
+
+        if(auth()->user()->canPublish()) {
+            $data['published_at'] = $request->input('published_at') ? now() : null;
+        }
+
+        $article->update($data);
 
         return redirect()->route('articles.index');
     }

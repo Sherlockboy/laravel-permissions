@@ -23,7 +23,8 @@
                         <div class="mt-4">
                             <x-label for="full_text" :value="__('Full Text')"/>
 
-                            <x-textarea name="full_text" rows="5" class="block mt-1 w-full">{{ $article->full_text }}</x-textarea>
+                            <x-textarea name="full_text" rows="5"
+                                        class="block mt-1 w-full">{{ $article->full_text }}</x-textarea>
                         </div>
 
                         <!-- Categories -->
@@ -32,10 +33,20 @@
 
                             <select class="block mt-1 w-full" name="category_id" id="category_id" required>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" @if($article->category_id == $category->id) selected @endif>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}"
+                                            @if($article->category_id == $category->id) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+
+                        @if(auth()->user()->canPublish())
+                        <!-- Published at -->
+                            <div class="mt-4">
+                                <x-checkbox name="published_at" value="1"/>
+
+                                <x-label for="published_at" :value="__('Published')"/>
+                            </div>
+                        @endif
 
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ml-4">
