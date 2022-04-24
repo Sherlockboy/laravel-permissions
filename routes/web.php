@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::resource('articles', ArticleController::class)->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::resource('articles', ArticleController::class);
+    Route::resource('categories', CategoryController::class)->middleware('admin');
+});
