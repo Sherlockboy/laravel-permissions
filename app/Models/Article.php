@@ -13,5 +13,6 @@ class Article extends Model
         'title',
         'full_text',
         'category_id',
+        'user_id',
     ];
 }

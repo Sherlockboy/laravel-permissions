@@ -24,6 +24,17 @@
                             <x-textarea class="block mt-1 w-full" name="full_text" required></x-textarea>
                         </div>
 
+                        <!-- Categories -->
+                        <div class="mt-4">
+                            <label for="category_id">Category</label>
+
+                            <select class="block mt-1 w-full" name="category_id" id="category_id" required>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ml-4">
                                 {{ __('Add') }}
