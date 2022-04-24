@@ -22,6 +22,11 @@
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Date</div>
                                 </th>
+                                @if(auth()->user()->IsAdmin())
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">User</div>
+                                    </th>
+                                @endif
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Action</div>
                                 </th>
@@ -36,6 +41,11 @@
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $article->created_at }}</div>
                                     </td>
+                                    @if(auth()->user()->IsAdmin())
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $article->user->name }}</div>
+                                        </td>
+                                    @endif
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="flex align-middle">
                                             <x-button-link :href="route('articles.edit', $article)">

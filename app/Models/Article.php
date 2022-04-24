@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
@@ -19,8 +20,13 @@ class Article extends Model
 
     protected static function booted()
     {
-        if (auth()->check()) {
+        if (auth()->check() && !auth()->user()->IsAdmin()) {
             static::addGlobalScope(new UserScope);
         }
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
